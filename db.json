@@ -1,0 +1,18 @@
+{
+    "users": [
+
+    ],
+    "products": [{
+            "id": 1,
+            "name": " Products A",
+            "price": 20000000,
+            "img": "https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/277781061_980000529321497_2608886534178831420_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=8Yz3xGQLFpsAX_Vwvln&tn=aj1O59BemSnPlt-v&_nc_ht=scontent.fhan2-1.fna&oh=00_AT-GEqj3uw14ik9eDKZeZRhCoytJeAWJq8qHPVCkLfmDfQ&oe=624CA7DA"
+        },
+        {
+            "id": 2,
+            "name": " Products B",
+            "price": 20000000,
+            "img": "https://scontent.fhan2-1.fna.fbcdn.net/v/t39.30808-6/277781061_980000529321497_2608886534178831420_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=8bfeb9&_nc_ohc=8Yz3xGQLFpsAX_Vwvln&tn=aj1O59BemSnPlt-v&_nc_ht=scontent.fhan2-1.fna&oh=00_AT-GEqj3uw14ik9eDKZeZRhCoytJeAWJq8qHPVCkLfmDfQ&oe=624CA7DA"
+        }
+    ]
+}
