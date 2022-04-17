@@ -23,36 +23,56 @@ import CategoryAdd from './pages/Layouts/admin/categorys/CategoryAdd';
 import CategoryEdit from './pages/Layouts/admin/categorys/CategoryEdit';
 import Signin from './pages/Layouts/client/users/Signin';
 import Signup from './pages/Layouts/client/users/Signup';
+import { toast } from 'react-toast';
 
 
 function App() {
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([])
   const [users, setUsers] = useState<UserType[]>([]);
   const [category, setCategory] = useState<CategoryType[]>([]);
   useEffect(() => {
     const getProducts = async () => {
       const { data } = await list();
+      console.log(data);
       setProducts(data);
     }
     getProducts();
 
   }, [])
-  const removeItem = async (id: number) => {
-    // xoa tren API
-    const { data } = await remove(id);
-    console.log(data);
-    // reRender
-    data && setProducts(products.filter(item => item._id !== data._id));
+  const removeItem = async (id: number | string) => {
+    try {
+      const { data } = await remove(id);
+      if (data) {
+        toast.success("xoa thanh cong");
+        setProducts(products.filter(item => item._id !== id))
+      }
+    } catch (error: {}) {
+      toast.error(error.response.data)
+
+    }
   }
   const onHandleAdd = async (product: ProductType) => {
-    // call API
-    const { data } = await add(product);
-    console.log(data);
-    setProducts([...products, data])
+    try {
+      const { data } = await add(product);
+      if (data) {
+        toast.success("Them thanh cong");
+        setProducts([...products, data]);
+      }
+    } catch (error: {}) {
+      toast.error(error.response.data)
+
+    }
   }
   const onHandleUpdate = async (product: ProductType) => {
-    const { data } = await update(product);
-    setProducts(products.map((item) => (item._id == data._id ? data : item)));
+    try {
+      const { data } = await update(product);
+      if (data) {
+        toast.success("Sua thanh cong");
+      }
+    } catch (error: {}) {
+      toast.error(error.response.data)
+
+    }
   };
 
   const onHandleAddUser = async (user: UserType) => {
@@ -105,12 +125,12 @@ function App() {
             <Route path='signin' element={<Signin />} />
             <Route path='signup' element={<Signup  />} />
 
-            <Route path="admin" element={<AdminLayout />}>
+            <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="product">
                 <Route index element={<ManagerProduct data={products} onRemoveItem={removeItem} />} />
-                <Route path="add" element={<ProductAdd  onAdd={onHandleAdd} />} />
+                <Route path="add" element={<ProductAdd  onAdd={onHandleAdd} cates={undefined} />} />
                 <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate} />} />
               </Route>
               <Route path='category'>
@@ -128,4 +148,8 @@ function App() {
 
 export default App
 
+
+function removeCategory(id: number): { data: any; } | PromiseLike<{ data: any; }> {
+  throw new Error('Function not implemented.');
+}
 
