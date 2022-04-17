@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { CategoryType } from '../../../../types/category';
 
 type ManagerCategoryProps = {
@@ -15,9 +15,9 @@ const ManagerCategory = (props: ManagerCategoryProps) => {
   return (
     <div>
       <h2 className=" my-4 mx-4 text-left">
-        <Link className="text-2xl" to={`/admin/category/add`}>
+        <NavLink className="text-2xl no-underline" to={`/admin/category/add`}>
           Thêm danh mục mới
-        </Link>
+        </NavLink>
       </h2>
       <table className="table table-striped table-hover">
         <thead>
@@ -33,15 +33,15 @@ const ManagerCategory = (props: ManagerCategoryProps) => {
                 <tr key={index}>
                   <td>{index + 1}</td>
                   <td>
-                    <Link to={`/category/${category._id}`}>{category.name}</Link>
+                    <NavLink className="no-underline" to={`/category/${category._id}`}>{category.name}</NavLink>
                   </td>
                   <td>
-                    <Link to={`/admin/category/${category._id}/edit`}>Edit</Link>
+                    <NavLink className="no-underline" to={`/admin/category/${category._id}/edit`}>Sửa</NavLink>
                     <button
-                      className=""
+                      className="px-[30px]"
                       onClick={() => props.removeCates(category._id)}
                     >
-                      Remove
+                      Xóa
                     </button>
                   </td>
                 </tr>

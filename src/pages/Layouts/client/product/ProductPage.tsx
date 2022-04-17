@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-import { listCates } from '../../../../api/category';
-import { CategoryType } from '../../../../types/category'
-import { ProductType } from '../../../../types/product'
+import React, { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { listCates } from "../../../../api/category";
+import { CategoryType } from "../../../../types/category";
+import { ProductType } from "../../../../types/product";
 
 type ProductPageProps = {
-  data: ProductType[],
-  cates: CategoryType[]
+  data: ProductType[];
+  cates: CategoryType[];
 };
 
 const ProductPage = (props: ProductPageProps) => {
@@ -15,9 +15,9 @@ const ProductPage = (props: ProductPageProps) => {
     const getCategorys = async () => {
       const { data: cates } = await listCates();
       setCategorys(cates);
-    }
+    };
     getCategorys();
-  })
+  });
   return (
     <div className="h-auto py-10">
       <div className="shop-box-inner">
@@ -132,36 +132,12 @@ const ProductPage = (props: ProductPageProps) => {
                       </select>
                     </div>
                   </div>
-                  <div className="col-12 col-sm-4 text-center text-sm-right">
-                    <ul className="nav nav-tabs ml-auto">
-                      <li>
-                        <a
-                          className="nav-link active"
-                          href="#grid-view"
-                          data-toggle="tab"
-                        >
-                          {" "}
-                          <i className="text-black px-2  fa fa-th" />{" "}
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="nav-link"
-                          href="#list-view"
-                          data-toggle="tab"
-                        >
-                          {" "}
-                          <i className="text-black px-2  fa fa-list-ul" />{" "}
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
                 {/* code product */}
-                <div tabIndex={0} className="focus:outline-none">
+                <div tabIndex={0} className="focus:outline-none no-underline">
                   {/* Remove py-8 */}
-                  <div className="mx-auto container py-8">
-                    <div className="flex flex-wrap items-center lg:justify-between justify-center">
+                  <div className="mx-auto container py-8 no-underline">
+                    <div className="flex flex-wrap items-center lg:justify-between justify-center no-underline">
                       {/* Card 1 */}
                       {props.data &&
                         props.data.map((product, index) => {
@@ -169,77 +145,48 @@ const ProductPage = (props: ProductPageProps) => {
                             <div
                               key={index}
                               tabIndex={0}
-                              className="h-100 shadow border-0 px-[10px] mb-4 pt-2 focus:outline-none mx-2 w-72 xl:mb-0 mb-8"
+                              className="h-100 shadow border-0 px-[10px] mb-4 pt-2 focus:outline-none mx-2 w-72 xl:mb-0 mb-8 no-underline"
                             >
-                              <Link to={`${product._id}`}>
+                              <NavLink to={`${product._id}`}>
                                 <div>
                                   <img
                                     alt="person capturing an image"
                                     src={product.img}
                                     tabIndex={0}
-                                    className="focus:outline-none w-full h-44"
+                                    className="focus:outline-none w-full h-44 no-underline"
                                   />
                                 </div>
-                              </Link>
-                              <div className="bg-white dark:bg-gray-800">
+                              </NavLink>
+                              <div className="bg-white dark:bg-gray-800 ">
                                 <div className="p-4">
-                                  <Link to={`${product._id}`}>
-                                    <div className="flex items-center">
+                                  <NavLink className="hover:underline no-underline text-black" to={`${product._id}`}>
+                                    <div className="flex items-center justify-between">
                                       <h2
                                         tabIndex={0}
-                                        className="focus:outline-none text-l dark:text-white font-semibold"
+                                        className="focus:outline-none font-semibold dark:text-black"
                                       >
                                         {product.name}
                                       </h2>
                                     </div>
                                     <p
                                       tabIndex={0}
-                                      className="focus:outline-none text-xs text-gray-600 dark:text-gray-200 mt-2"
+                                      className="focus:outline-none text-s text-gray-600 dark:text-black mt-2 "
                                     >
                                       {product.name}
                                     </p>
-                                  </Link>
+                                  </NavLink>
                                   <div className="flex items-center justify-between pt-[2px]">
-                                    <div className="product-action d-flex justify-content-around">
-                                      <a
-                                        href="#like"
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title="Yêu thích sản phẩm"
-                                      >
-                                        <i
-                                          className="fas fa-heart px-2"
-                                          style={{ color: "red" }}
-                                        />
-                                      </a>
-                                      <span className="saperator">|</span>
-                                      <Link
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title="Yêu thích sản phẩm"
-                                        to={`${product._id}`}
-                                      >
-                                        <i className="fas fa-eye px-2" />
-                                      </Link>
-                                      <span className="saperator">|</span>
-                                      <a
-                                        href="#cart"
-                                        data-toggle="tooltip"
-                                        data-placement="top"
-                                        title="Thêm vào giỏ hàng"
-                                      >
-                                        <i
-                                          className="fas fa-cart-plus px-2"
-                                          style={{ color: "blue" }}
-                                        />
-                                      </a>
-                                    </div>
                                     <h3
                                       tabIndex={0}
                                       className="focus:outline-none text-indigo-700 text-xl font-semibold"
                                     >
                                       ${product.price}
                                     </h3>
+                                  </div>
+                                  <div className="conten-item text-center ">
+                                    <button className="inline-flex items-center px-4 py-[10px] border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[green] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                      Thêm vào giỏ
+                                    </button>
                                   </div>
                                 </div>
                               </div>
@@ -255,7 +202,7 @@ const ProductPage = (props: ProductPageProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductPage
+export default ProductPage;

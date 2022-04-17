@@ -4,20 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { CategoryType } from '../../../../types/category'
 
 type Props = {
-    onAddCates: (category: CategoryType) => void
+
+    onAdd: (category: CategoryType) => void
 }
 
 type FormValues = {
-    name: string,
-    img: string
+    name: string
 };
 
 const CategoryAdd = (props: Props) => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormValues>();
     const navigate = useNavigate();
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        props.onAddCates(data);
-        navigate('/admin/category');
+        props.onAdd(data);
+        navigate("/admin/category");
+        // console.log(data);
     }
     return (
         <div>
@@ -36,13 +37,6 @@ const CategoryAdd = (props: Props) => {
                                         <input  {...register('name', { required: true })} className="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                         {errors.name && errors.name.type === "required" && <span>Nhập vào tên danh mục sản phẩm</span>}
                                         <label htmlFor="name">Tên danh mục sản phẩm</label>
-                                    </div>
-
-                                    <div className="form-floating mb-3">
-                                        <input className="form-control" id="img" type="file" placeholder="" data-sb-validations="required" />
-                                        <label htmlFor="img">
-                                            <img className="rounded mx-auto d-block" src='' alt="" />
-                                        </label>
                                     </div>
                                     <div className="d-grid border border-solid-2 py-2 rounded bg-primary"><button className="" id="submitButton" type="submit">Thêm</button></div>
                                 </form>

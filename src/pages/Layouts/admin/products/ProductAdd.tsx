@@ -6,15 +6,16 @@ import { CategoryType } from '../../../../types/category'
 import { ProductType } from '../../../../types/product'
 
 type ProductAddProps = {
-    cates: CategoryType[],
+    cates: any
+    
     onAdd: (product: ProductType) => void
 }
 type FormValues = {
     name: string,
     img: string,
     price: number,
-    title: string,
-    category: string
+    desc : string
+
 };
 
 const ProductAdd = (props: ProductAddProps) => {
@@ -25,12 +26,15 @@ const ProductAdd = (props: ProductAddProps) => {
         const getCategorys = async () => {
             const { data: cates } = await listCates();
             setCategorys(cates);
-            console.log(cates)
+            // console.log(cates)
         };
         getCategorys();
     }, []);
     const onSubmit: SubmitHandler<FormValues> = (data) =>{
         props.onAdd(data);
+        navigate("/admin/product")
+        // console.log(data);
+        
     }
   return (
     <div>
@@ -58,31 +62,37 @@ const ProductAdd = (props: ProductAddProps) => {
                                     </div>
 
                                     <div className="form-floating mb-3">
-                                        <input  {...register('title', { required: true })} className="form-control" id="title" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                        <input  {...register('img', { required: true })} className="form-control" id="title" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                        {errors.name && errors.name.type === "required" && <span>Nhập vào mô tả sản phẩm</span>}
+                                        <label htmlFor="name">Hinh anh</label>
+                                    </div>
+                                    
+                                    <div className="form-floating mb-3">
+                                        <input  {...register('desc', { required: true })} className="form-control" id="title" type="text" placeholder="Enter your name..." data-sb-validations="required" />
                                         {errors.name && errors.name.type === "required" && <span>Nhập vào mô tả sản phẩm</span>}
                                         <label htmlFor="name">Mô tả</label>
                                     </div>
-
+{/* { 
                                     <div className="input-group mb-3">
                                         <label className="input-group-text py-3" htmlFor="inputGroupSelect02">Danh mục</label>
                                         <select className="form-select" >
                                             <option selected>Chọn danh mục</option>
                                             {props.cates &&
-                                                props.cates.map((category, index) => {
+                                                props.cates.map((category: { name: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined }, index: any) => {
                                                     return (
                                                         <option{...register('category', { required: true })} id="category">{category.name}</option>
                                                     );
                                                 })}
                                         </select>
-                                    </div>
+                                    </div> }
 
-
-                                    <div className="form-floating mb-3">
+{  */}
+                                    {/* <div className="form-floating mb-3">
                                         <input className="form-control" id="img" type="file" placeholder="" data-sb-validations="required" />
                                         <label htmlFor="img">
                                             <img className="rounded mx-auto d-block" src='' alt="" />
                                         </label>
-                                    </div>
+                                    </div> } */}
                                     <div className="d-grid border border-solid-2 py-2 rounded bg-primary"><button className="" id="submitButton" type="submit">Thêm</button></div>
                                 </form>
                             </div>

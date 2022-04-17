@@ -37,7 +37,7 @@ const Home = ({ products }: ProductListProps) => {
             <img src="https://rafcart.rslahmed.com/assets/images/svg/service-hours.svg" className="m-auto" />
           </div>
           <div>
-            <h2 className="font-bold font-bold text-[20px]">24/7 Support</h2>
+            <h2 className="font-bold text-[20px]">24/7 Support</h2>
             <p className="text-xs">Customer support</p>
           </div>
         </div>
@@ -54,18 +54,18 @@ const Home = ({ products }: ProductListProps) => {
             console.log(product)
             return (
               <form action="">
-                <div className=" khoiy border-solid border-2 border-[#f3f3f3] rounded-lg  ">
+                <div className=" border-solid border-2 border-[#f3f3f3] rounded-lg  ">
                   <div className=" w-[100%] ">
-                    <NavLink to={`/products/${product._id}`}> <img src={product.img} /></NavLink>
+                    <NavLink to={`/product/${product._id}`}> <img src={product.img} /></NavLink>
                   </div>
                   <div className="py-[10px] px-[10px] leading-8">
-                    <NavLink to={`/products/${product._id}`} className="no-underline">
+                    <NavLink to={`/product/${product._id}`} className="no-underline">
                       <h4 className="no-underline text-blue-600 visited:text-purple-600 hover:text-red-500">{product.name}</h4>
                     </NavLink>
-                    <p className="text-[15px] text-[red]">{product.price}</p>
+                    <p className="text-l text-[red] no-underline">${product.price}</p>
 
                   </div>
-                  <div className="conten-item text-center">
+                  <div className="conten-item text-center pb-[10px]">
                     <button type="button" className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[green] hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Thêm vào giỏ</button>
                   </div>
                 </div>
