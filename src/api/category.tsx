@@ -2,23 +2,23 @@ import { CategoryType } from "../types/category";
 import instance from "./instance";
 
 export const listCates = () => {
-    const url = `/categorys`;
+    const url = `/category`;
     return instance.get(url);
 }
-export const createCares = (category: CategoryType) => {
-    const url = "/categorys";
+export const createCates = (category: CategoryType) => {
+    const url = "/category";
     return instance.post(url, category);
 };
-export const readCates = (id: number) => {
-    const url = `/category${id}`;
+export const readCates = (_id: number) => {
+    const url = `/category/${_id}`;
     return instance.get(url); 
 };
 export const removeCates = (_id: CategoryType) => {
-    const url = `/categorys/${_id}`;
+    const url = `/category/${_id}`;
     return instance.delete(url);
 };
 export const updateCates = (category: CategoryType) => {
-    const url = `/categorys/${category._id}`;
+    const url = `/category/${category._id}`;
     return instance.put(url, category);
 }
 
